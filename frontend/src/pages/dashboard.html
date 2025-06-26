@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | OSINT-AI Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .cyber-grid {
+            background-image: radial-gradient(circle at 1px 1px, rgba(34, 197, 94, 0.3) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white cyber-grid">
+    <!-- Navigation -->
+    <nav class="bg-black/70 backdrop-blur-sm border-b border-green-500/30">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-eye text-green-400 text-2xl"></i>
+                    <h1 class="text-xl font-bold text-green-400">OSINT-AI Dashboard</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="userName" class="text-gray-300"></span>
+                    <button onclick="showSearchModal()" class="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-lg font-semibold transition-colors">
+                        <i class="fas fa-search mr-2"></i>Nouvelle Recherche
+                    </button>
+                    <button onclick="logout()" class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded-lg font-semibold transition-colors">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Stats Cards -->
+        <div class="grid md:grid-cols-4 gap-6 mb-8">
+            <div class="glass-effect rounded-lg p-6 text-center">
+                <i class="fas fa-search text-green-400 text-3xl mb-3"></i>
+                <h3 id="searchesUsed" class="text-2xl font-bold">-</h3>
+                <p class="text-gray-300">Recherches utilisées</p>
+            </div>
+            <div class="glass-effect rounded-lg p-6 text-center">
+                <i class="fas fa-battery-three-quarters text-blue-400 text-3xl mb-3"></i>
+                <h3 id="searchesRemaining" class="text-2xl font-bold">-</h3>
+                <p class="text-gray-300">Recherches restantes</p>
+            </div>
+            <div class="glass-effect rounded-lg p-6 text-center">
+                <i class="fas fa-crown text-yellow-400 text-3xl mb-3"></i>
+                <h3 id="subscriptionPlan" class="text-2xl font-bold">-</h3>
+                <p class="text-gray-300">Plan actuel</p>
+            </div>
+            <div class="glass-effect rounded-lg p-6 text-center">
+                <i class="fas fa-check-circle text-purple-400 text-3xl mb-3"></i>
+                <h3 id="totalSearches" class="text-2xl font-bold">-</h3>
+                <p class="text-gray-300">Total recherches</p>
+            </div>
+        </div>
+
+        <!-- Quick Search -->
+        <div class="glass-effect rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-search text-green-400 mr-3"></i>
+                Recherche Rapide OSINT
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Cible à analyser</label>
+                    <input type="text" id="quickSearchTarget" placeholder="Nom, handle, email, domaine..." 
+                           class="w-full bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-green-400 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Type de recherche</label>
+                    <select id="quickSearchType" class="w-full bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-green-400 focus:outline-none">
+                        <option value="person">Personne</option>
+                        <option value="handle">Handle/Pseudo</option>
+                        <option value="email">Email</option>
+                        <option value="domain">Domaine</option>
+                        <option value="phone">Téléphone</option>
+                        <option value="custom">Personnalisé</option>
+                    </select>
+                </div>
+            </div>
+            <button onclick="startSearch()" class="mt-4 bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-lg font-bold transition-all">
+                <i class="fas fa-play mr-2"></i>Lancer la recherche
+            </button>
+        </div>
+
+        <!-- Recent Searches -->
+        <div class="glass-effect rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-history text-blue-400 mr-3"></i>
+                Recherches récentes
+            </h2>
+            <div id="recentSearches" class="space-y-4">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+
+        <!-- Upgrade Section (for free users) -->
+        <div id="upgradeSection" class="glass-effect rounded-lg p-6 border-2 border-green-500/50 hidden">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <i class="fas fa-rocket text-green-400 mr-3"></i>
+                Upgrader votre compte
+            </h2>
+            <p class="text-gray-300 mb-6">
+                Débloquez plus de recherches et des fonctionnalités avancées avec nos plans Premium et Enterprise.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-green-900/50 to-green-800/50 p-6 rounded-lg border border-green-500/30">
+                    <h3 class="text-xl font-bold mb-2">Premium</h3>
+                    <div class="text-3xl font-bold mb-4">29€<span class="text-sm">/mois</span></div>
+                    <ul class="space-y-2 mb-6">
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>100 recherches/mois</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Rapports IA détaillés</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Export PDF/JSON</li>
+                    </ul>
+                    <button onclick="upgradeToPremium()" class="w-full bg-green-600 hover:bg-green-500 py-3 rounded-lg font-semibold">
+                        Upgrader vers Premium
+                    </button>
+                </div>
+                <div class="bg-gradient-to-br from-purple-900/50 to-purple-800/50 p-6 rounded-lg border border-purple-500/30">
+                    <h3 class="text-xl font-bold mb-2">Enterprise</h3>
+                    <div class="text-3xl font-bold mb-4">99€<span class="text-sm">/mois</span></div>
+                    <ul class="space-y-2 mb-6">
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>1000 recherches/mois</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>API illimitée</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Support 24/7</li>
+                    </ul>
+                    <button onclick="contactEnterprise()" class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg font-semibold">
+                        Contacter Commercial
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="glass-effect rounded-lg p-8 max-w-md w-full">
+                <h3 class="text-2xl font-bold mb-6 text-center flex items-center justify-center">
+                    <i class="fas fa-search text-green-400 mr-3"></i>Nouvelle Recherche
+                </h3>
+                <form id="searchForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">Cible</label>
+                        <input type="text" id="searchTarget" required 
+                               class="w-full bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-green-400 focus:outline-none">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2">Type</label>
+                        <select id="searchType" required 
+                                class="w-full bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-green-400 focus:outline-none">
+                            <option value="person">Personne</option>
+                            <option value="handle">Handle/Pseudo</option>
+                            <option value="email">Email</option>
+                            <option value="domain">Domaine</option>
+                            <option value="phone">Téléphone</option>
+                            <option value="custom">Personnalisé</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-green-600 hover:bg-green-500 text-white py-3 rounded-lg font-semibold transition-colors">
+                        <i class="fas fa-play mr-2"></i>Lancer la recherche
+                    </button>
+                </form>
+                <button onclick="closeSearchModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8000';
+        let dashboardData = null;
+
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            loadDashboard();
+        });
+
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/index.html';
+                return;
+            }
+            
+            const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+            if (userInfo.full_name) {
+                document.getElementById('userName').textContent = userInfo.full_name;
+            }
+        }
+
+        async function loadDashboard() {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch(`${API_BASE_URL}/api/user/dashboard`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    dashboardData = await response.json();
+                    updateDashboard(dashboardData);
+                } else {
+                    throw new Error('Failed to load dashboard');
+                }
+            } catch (error) {
+                console.error('Dashboard load error:', error);
+                alert('Erreur lors du chargement du dashboard');
+            }
+        }
+
+        function updateDashboard(data) {
+            document.getElementById('searchesUsed').textContent = data.searches_used;
+            document.getElementById('searchesRemaining').textContent = data.searches_remaining;
+            document.getElementById('subscriptionPlan').textContent = data.subscription_plan.toUpperCase();
+            document.getElementById('totalSearches').textContent = data.total_searches;
+
+            // Show upgrade section for free users
+            if (data.subscription_plan === 'free') {
+                document.getElementById('upgradeSection').classList.remove('hidden');
+            }
+
+            // Update recent searches
+            updateRecentSearches(data.recent_searches);
+        }
+
+        function updateRecentSearches(searches) {
+            const container = document.getElementById('recentSearches');
+            
+            if (searches.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-gray-400 py-8">
+                        <i class="fas fa-search text-4xl mb-4"></i>
+                        <p>Aucune recherche effectuée pour le moment</p>
+                        <p class="text-sm">Commencez votre première investigation OSINT</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = searches.map(search => `
+                <div class="flex items-center justify-between p-4 bg-gray-800/30 rounded-lg border border-gray-600/50">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center ${getStatusColor(search.status)}">
+                            <i class="fas ${getStatusIcon(search.status)}"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">${search.target}</h4>
+                            <p class="text-sm text-gray-400">${search.search_type} • ${formatDate(search.created_at)}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        ${search.confidence_score ? `<span class="text-sm font-medium ${getConfidenceColor(search.confidence_score)}">${search.confidence_score.toFixed(1)}%</span>` : ''}
+                        <span class="text-xs px-2 py-1 rounded-full ${getStatusBadgeColor(search.status)}">${getStatusText(search.status)}</span>
+                        ${search.status === 'completed' ? `<button onclick="viewResults(${search.id})" class="text-blue-400 hover:text-blue-300"><i class="fas fa-eye"></i></button>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getStatusColor(status) {
+            switch(status) {
+                case 'completed': return 'bg-green-600';
+                case 'processing': return 'bg-blue-600';
+                case 'failed': return 'bg-red-600';
+                default: return 'bg-yellow-600';
+            }
+        }
+
+        function getStatusIcon(status) {
+            switch(status) {
+                case 'completed': return 'fa-check';
+                case 'processing': return 'fa-spinner fa-spin';
+                case 'failed': return 'fa-times';
+                default: return 'fa-clock';
+            }
+        }
+
+        function getStatusBadgeColor(status) {
+            switch(status) {
+                case 'completed': return 'bg-green-900/50 text-green-400';
+                case 'processing': return 'bg-blue-900/50 text-blue-400';
+                case 'failed': return 'bg-red-900/50 text-red-400';
+                default: return 'bg-yellow-900/50 text-yellow-400';
+            }
+        }
+
+        function getStatusText(status) {
+            switch(status) {
+                case 'completed': return 'Terminé';
+                case 'processing': return 'En cours';
+                case 'failed': return 'Échec';
+                default: return 'En attente';
+            }
+        }
+
+        function getConfidenceColor(score) {
+            if (score >= 70) return 'text-green-400';
+            if (score >= 40) return 'text-yellow-400';
+            return 'text-red-400';
+        }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('fr-FR', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function showSearchModal() {
+            document.getElementById('searchModal').classList.remove('hidden');
+        }
+
+        function closeSearchModal() {
+            document.getElementById('searchModal').classList.add('hidden');
+        }
+
+        async function startSearch() {
+            const target = document.getElementById('quickSearchTarget').value.trim();
+            const type = document.getElementById('quickSearchType').value;
+            
+            if (!target) {
+                alert('Veuillez entrer une cible à analyser');
+                return;
+            }
+
+            await performSearch(target, type);
+        }
+
+        async function performSearch(target, type) {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch(`${API_BASE_URL}/api/search`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        target: target,
+                        search_type: type
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Recherche lancée avec succès!');
+                    closeSearchModal();
+                    // Clear search inputs
+                    document.getElementById('quickSearchTarget').value = '';
+                    document.getElementById('searchTarget').value = '';
+                    // Reload dashboard
+                    loadDashboard();
+                } else {
+                    throw new Error(data.detail || 'Erreur lors du lancement de la recherche');
+                }
+            } catch (error) {
+                alert(error.message || 'Erreur lors du lancement de la recherche');
+            }
+        }
+
+        function viewResults(searchId) {
+            alert(`Affichage des résultats pour la recherche #${searchId}`);
+            // TODO: Implement results view
+        }
+
+        function upgradeToPremium() {
+            alert('Redirection vers le paiement Premium...');
+            // TODO: Implement Stripe checkout
+        }
+
+        function contactEnterprise() {
+            alert('Contactez notre équipe commerciale pour le plan Enterprise');
+            // TODO: Implement contact form
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userInfo');
+            window.location.href = '/index.html';
+        }
+
+        // Search form handler
+        document.getElementById('searchForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const target = document.getElementById('searchTarget').value.trim();
+            const type = document.getElementById('searchType').value;
+            
+            if (!target) {
+                alert('Veuillez entrer une cible');
+                return;
+            }
+
+            await performSearch(target, type);
+        });
+
+        // Close modal on outside click
+        document.addEventListener('click', function(e) {
+            if (e.target.id === 'searchModal') {
+                closeSearchModal();
+            }
+        });
+
+        // Auto-refresh dashboard every 30 seconds
+        setInterval(loadDashboard, 30000);
+    </script>
+</body>
+</html>

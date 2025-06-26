@@ -1,0 +1,22 @@
+[Unit]
+Description=C2 Server - Command and Control Server
+After=network.target
+
+[Service]
+Type=simple
+User=c2
+Group=c2
+WorkingDirectory=/opt/c2-server
+Environment=PATH=/opt/c2-server/venv/bin
+ExecStart=/opt/c2-server/venv/bin/python c2_server.py
+Restart=always
+RestartSec=10
+
+# Sécurité
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/c2-server
+
+[Install]
+WantedBy=multi-user.target

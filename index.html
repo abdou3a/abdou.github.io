@@ -1,66 +1,1053 @@
----
-layout: default
-title: Accueil
-description: Portfolio de Abdellaoui Abdelilah - Développeur IA et automatisation
----
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT-AI Platform | Intelligence & Investigation SaaS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .cyber-grid {
+            background-image: radial-gradient(circle at 1px 1px, rgba(34, 197, 94, 0.3) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .glow-on-hover {
+            transition: all 0.3s ease;
+        }
+        .glow-on-hover:hover {
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.7);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white cyber-grid">
+    <!-- Navigation -->
+    <nav class="bg-black/70 backdrop-blur-sm border-b border-green-500/30 sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-eye text-green-400 text-3xl"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold text-green-400">OSINT-AI Platform</h1>
+                        <p class="text-gray-400 text-xs">Intelligence & Investigation SaaS</p>
+                    </div>
+                </div>
+                <div id="authButtons" class="space-x-4">
+                    <button onclick="showLoginModal()" class="bg-green-600 hover:bg-green-500 px-6 py-2 rounded-lg font-semibold transition-colors">
+                        Se connecter
+                    </button>
+                    <button onclick="showRegisterModal()" class="border border-green-500 hover:bg-green-500/20 px-6 py-2 rounded-lg font-semibold transition-colors">
+                        S'inscrire
+                    </button>
+                </div>
+                <div id="userMenu" class="hidden space-x-4">
+                    <span id="userName" class="text-green-400"></span>
+                    <button onclick="goToDashboard()" class="bg-blue-600 hover:bg-blue-500 px-6 py-2 rounded-lg font-semibold transition-colors">
+                        Dashboard
+                    </button>
+                    <button onclick="logout()" class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded-lg font-semibold transition-colors">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<section id="about">
-  <h2>About Me</h2>
-  <p>Développeur passionné par l'intelligence artificielle et l'automatisation. Spécialisé dans la création d'outils innovants pour l'extraction et le traitement de données.</p>a charset="UTF-8">
-</section>me="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Hero Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                OSINT-AI Platform
+            </h2>
+            <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                Plateforme SaaS d'intelligence artificielle pour l'investigation OSINT. 
+                Recherchez, analysez et obtenez des insights professionnels avec des outils de pointe.
+            </p>
+            <div id="heroActions">
+                <button onclick="showRegisterModal()" class="bg-green-600 hover:bg-green-500 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all transform hover:scale-105 glow-on-hover mr-4">
+                    <i class="fas fa-rocket mr-2"></i>Commencer gratuitement
+                </button>
+                <button onclick="showDemoModal()" class="border border-blue-500 hover:bg-blue-500/20 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all">
+                    <i class="fas fa-play mr-2"></i>Voir Démo
+                </button>
+            </div>
+        </div>
+    </section>
 
-<section id="projects">el="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <h2>Projects</h2>
-  <ul class="project-list">
-    <li class="project">
-      <h3>PDF AI Text Extractor</h3>
-      <p>Application IA pour extraire automatiquement du texte des PDF et cartes d'identité, avec création de base de données structurée.</p>
-      <a href="#pdf-extractor" class="project-link">Utiliser l'outil</a>ef="#about">About</a>
-    </li>      <a href="#projects">Projects</a>
-  </ul> href="#pdf-extractor">PDF AI Extractor</a>
-</section>>Contact</a>
+    <!-- Features Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <h3 class="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                Fonctionnalités Avancées
+            </h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-effect rounded-lg p-8 text-center glow-on-hover">
+                    <i class="fas fa-search text-green-400 text-5xl mb-6"></i>
+                    <h4 class="text-2xl font-bold mb-4">Recherche OSINT</h4>
+                    <p class="text-gray-300">Analyse complète de personnes, handles, domaines et emails avec intelligence artificielle</p>
+                </div>
+                <div class="glass-effect rounded-lg p-8 text-center glow-on-hover">
+                    <i class="fas fa-brain text-blue-400 text-5xl mb-6"></i>
+                    <h4 class="text-2xl font-bold mb-4">IA Avancée</h4>
+                    <p class="text-gray-300">Scoring de confiance intelligent et analyse comportementale automatisée</p>
+                </div>
+                <div class="glass-effect rounded-lg p-8 text-center glow-on-hover">
+                    <i class="fas fa-chart-line text-purple-400 text-5xl mb-6"></i>
+                    <h4 class="text-2xl font-bold mb-4">Rapports Professionnels</h4>
+                    <p class="text-gray-300">Visualisations interactives et exports PDF/JSON pour usage professionnel</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="pdf-extractor">
-  <h2>PDF AI Text Extractor</h2>
-  <div class="extractor-container">  <main>
-    <div class="upload-area">
-      <h3>Télécharger un fichier PDF</h3>
-      <input type="file" id="pdfFile" accept=".pdf" />par l'intelligence artificielle et l'automatisation. Spécialisé dans la création d'outils innovants pour l'extraction et le traitement de données.</p>
-      <button onclick="processPDF()">Extraire le texte</button>
+    <!-- Statistics Section -->
+    <section class="py-16 bg-black/30">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div class="glass-effect rounded-lg p-6">
+                    <i class="fas fa-users text-green-400 text-3xl mb-4"></i>
+                    <h3 class="text-3xl font-bold text-green-400">1000+</h3>
+                    <p class="text-gray-300">Utilisateurs Actifs</p>
+                </div>
+                <div class="glass-effect rounded-lg p-6">
+                    <i class="fas fa-search text-blue-400 text-3xl mb-4"></i>
+                    <h3 class="text-3xl font-bold text-blue-400">50K+</h3>
+                    <p class="text-gray-300">Recherches Effectuées</p>
+                </div>
+                <div class="glass-effect rounded-lg p-6">
+                    <i class="fas fa-database text-purple-400 text-3xl mb-4"></i>
+                    <h3 class="text-3xl font-bold text-purple-400">100+</h3>
+                    <p class="text-gray-300">Sources Analysées</p>
+                </div>
+                <div class="glass-effect rounded-lg p-6">
+                    <i class="fas fa-shield-alt text-yellow-400 text-3xl mb-4"></i>
+                    <h3 class="text-3xl font-bold text-yellow-400">100%</h3>
+                    <p class="text-gray-300">Légal & Éthique</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <h3 class="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                Plans & Tarifs
+            </h3>
+            <p class="text-center text-gray-300 mb-12">Choisissez le plan qui correspond à vos besoins</p>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Free Plan -->
+                <div class="glass-effect rounded-lg p-8 text-center">
+                    <h4 class="text-2xl font-bold mb-4">Free</h4>
+                    <div class="text-5xl font-bold mb-6">0€<span class="text-lg text-gray-400">/mois</span></div>
+                    <ul class="space-y-3 mb-8 text-left">
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>3 recherches par mois</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Rapports basiques</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Support communautaire</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Sources publiques</li>
+                    </ul>
+                    <button onclick="showRegisterModal()" class="w-full bg-gray-600 hover:bg-gray-500 py-3 rounded-lg font-semibold transition-colors">
+                        Commencer Gratuitement
+                    </button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="glass-effect rounded-lg p-8 text-center border-2 border-green-500 relative transform scale-105">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-black px-4 py-1 rounded-full text-sm font-bold">
+                        Populaire
+                    </div>
+                    <h4 class="text-2xl font-bold mb-4">Premium</h4>
+                    <div class="text-5xl font-bold mb-6">29€<span class="text-lg text-gray-400">/mois</span></div>
+                    <ul class="space-y-3 mb-8 text-left">
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>100 recherches par mois</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Rapports IA détaillés</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Export PDF/JSON</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Support prioritaire</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>API Access</li>
+                    </ul>
+                    <button onclick="selectPlan('premium')" class="w-full bg-green-600 hover:bg-green-500 py-3 rounded-lg font-semibold transition-colors">
+                        Choisir Premium
+                    </button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="glass-effect rounded-lg p-8 text-center">
+                    <h4 class="text-2xl font-bold mb-4">Enterprise</h4>
+                    <div class="text-5xl font-bold mb-6">99€<span class="text-lg text-gray-400">/mois</span></div>
+                    <ul class="space-y-3 mb-8 text-left">
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>1000 recherches par mois</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Rapports avancés</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Intégrations personnalisées</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Support dédié 24/7</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>API illimitée</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Formation équipe</li>
+                    </ul>
+                    <button onclick="selectPlan('enterprise')" class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg font-semibold transition-colors">
+                        Contacter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-green-900/50 to-blue-900/50">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-4xl font-bold mb-6">Prêt à commencer votre investigation ?</h3>
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                Rejoignez des milliers d'enquêteurs, journalistes et professionnels de la sécurité qui font confiance à OSINT-AI
+            </p>
+            <button onclick="showRegisterModal()" class="bg-green-600 hover:bg-green-500 text-white px-10 py-4 rounded-lg text-xl font-bold transition-all transform hover:scale-105 glow-on-hover">
+                <i class="fas fa-rocket mr-3"></i>Commencer maintenant - Gratuit
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/70 backdrop-blur-sm border-t border-green-500/30">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i class="fas fa-eye text-green-400 text-2xl"></i>
+                        <h3 class="text-xl font-bold text-green-400">OSINT-AI Platform</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Plateforme d'intelligence artificielle pour l'investigation et l'analyse OSINT professionnelle.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4">Fonctionnalités</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><a href="#" class="hover:text-green-400 transition-colors">Recherche OSINT</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors">Analyse IA</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors">Rapports détaillés</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors">API Access</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4">Support</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><a href="#" class="hover:text-green-400 transition-colors">Documentation</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors">Guides</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4">Conformité</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-shield-alt text-green-400 mr-2"></i>Sources publiques</li>
+                        <li class="flex items-center"><i class="fas fa-balance-scale text-green-400 mr-2"></i>Usage légal</li>
+                        <li class="flex items-center"><i class="fas fa-user-shield text-green-400 mr-2"></i>Respect vie privée</li>
+                        <li class="flex items-center"><i class="fas fa-certificate text-green-400 mr-2"></i>Éthique OSINT</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+                <p class="text-gray-400">
+                    <i class="fas fa-shield-alt text-green-400 mr-2"></i>
+                    OSINT-AI Platform © 2025 - Tous droits réservés
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="glass-effect rounded-lg p-8 max-w-md w-full">
+                <h3 class="text-2xl font-bold mb-6 text-center flex items-center justify-center">
+                    <i class="fas fa-sign-in-alt text-green-400 mr-3"></i>Connexion
+                </h3>
+                <form id="loginForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">Email</label>
+                        <input type="email" id="loginEmail" required 
+                               class="w-full bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-green-400 focus:outline-none transition-colors">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2">Mot de passe</label>
+                        <input type="password" id="loginPassword" required 
+                               class="w-full bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-green-400 focus:outline-none transition-colors">
+                    </div>
+                    <button type="submit" class="w-full bg-green-600 hover:bg-green-500 text-white py-3 rounded-lg font-semibold transition-colors mb-4">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Se connecter
+                    </button>
+                </form>
+                <p class="text-center text-gray-400 text-sm">
+                    Pas encore de compte ? 
+                    <button onclick="closeModals(); showRegisterModal();" class="text-green-400 hover:text-green-300 underline">
+                        S'inscrire ici
+                    </button>
+                </p>
+                <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
     </div>
-    
-    <div class="results-area">
-      <h3>Résultats d'extraction</h3>ss="project-list">
-      <div id="extractedData" class="data-display"></div> class="project">
-      <button onclick="exportToDatabase()" style="display:none;" id="exportBtn">Exporter vers base de données</button>PDF AI Text Extractor</h3>
-    </div>          <p>Application IA pour extraire automatiquement du texte des PDF et cartes d'identité, avec création de base de données structurée.</p>
-    r" class="project-link">Utiliser l'outil</a>
-    <div class="database-area">
-      <h3>Base de données</h3>
-      <table id="dataTable" class="data-table">
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Prénom</th>ss="extractor-container">
-            <th>Date de naissance</th><div class="upload-area">
-            <th>Numéro ID</th>er PDF</h3>
-            <th>Date d'extraction</th> accept=".pdf" />
-          </tr>utton>
-        </thead>
-        <tbody id="tableBody">
-        </tbody><div class="results-area">
-      </table>n</h3>
-      <button onclick="exportToCSV()">Exporter en CSV</button>class="data-display"></div>
-    </div>e="display:none;" id="exportBtn">Exporter vers base de données</button>
-  </div>
-</section>
--area">
-<section id="contact">h3>
-  <h2>Contact</h2>a-table">
-  <p>Email: abdellaoui.abdelilah@example.com</p>
-  <p>GitHub: github.com/abdou</p>
-</section>>Nom</th>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
-  <script src="{{ '/assets/js/script.js' | relative_url }}"></script>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="glass-effect rounded-lg p-8 max-w-md w-full">
+                <h3 class="text-2xl font-bold mb-6 text-center flex items-center justify-center">
+                    <i class="fas fa-user-plus text-green-400 mr-3"></i>Inscription
+                </h3>
+                <form id="registerForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">Nom complet</label>
+                        <input type="text" id="registerName" required 
+                               class="w-full bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-green-400 focus:outline-none transition-colors">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">Nom d'utilisateur</label>
+                        <input type="text" id="registerUsername" required 
+                               class="w-full bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-green-400 focus:outline-none transition-colors">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">Email</label>
+                        <input type="email" id="registerEmail" required 
+                               class="w-full bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-green-400 focus:outline-none transition-colors">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2">Mot de passe</label>
+                        <input type="password" id="registerPassword" required 
+                               class="w-full bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-green-400 focus:outline-none transition-colors">
+                    </div>
+                    <button type="submit" class="w-full bg-green-600 hover:bg-green-500 text-white py-3 rounded-lg font-semibold transition-colors mb-4">
+                        <i class="fas fa-user-plus mr-2"></i>Créer mon compte
+                    </button>
+                </form>
+                <p class="text-center text-gray-400 text-sm">
+                    Déjà un compte ? 
+                    <button onclick="closeModals(); showLoginModal();" class="text-green-400 hover:text-green-300 underline">
+                        Se connecter ici
+                    </button>
+                </p>
+                <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Modal -->
+    <div id="demoModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="glass-effect rounded-lg p-8 max-w-2xl w-full">
+                <h3 class="text-2xl font-bold mb-6 text-center flex items-center justify-center">
+                    <i class="fas fa-play text-blue-400 mr-3"></i>Démo OSINT-AI
+                </h3>
+                <div class="aspect-video bg-gray-800 rounded-lg flex items-center justify-center mb-6">
+                    <div class="text-center">
+                        <i class="fas fa-play-circle text-6xl text-blue-400 mb-4"></i>
+                        <p class="text-gray-300">Vidéo de démonstration</p>
+                        <p class="text-sm text-gray-400">Découvrez les fonctionnalités en action</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button onclick="showRegisterModal(); closeModals();" class="bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-semibold transition-colors mr-4">
+                        Essayer maintenant
+                    </button>
+                    <button onclick="closeModals()" class="bg-gray-600 hover:bg-gray-500 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                        Fermer
+                    </button>
+                </div>
+                <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API Base URL
+        const API_BASE_URL = 'http://localhost:8000';
+        
+        // Check if user is logged in on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+        });
+
+        function checkAuthStatus() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                // User is logged in
+                document.getElementById('authButtons').classList.add('hidden');
+                document.getElementById('userMenu').classList.remove('hidden');
+                
+                // Get user info (you might want to decode the token or make an API call)
+                const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+                if (userInfo.full_name) {
+                    document.getElementById('userName').textContent = userInfo.full_name;
+                }
+            }
+        }
+
+        function showLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+        }
+        
+        function showRegisterModal() {
+            document.getElementById('registerModal').classList.remove('hidden');
+        }
+        
+        function showDemoModal() {
+            document.getElementById('demoModal').classList.remove('hidden');
+        }
+        
+        function closeModals() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('registerModal').classList.add('hidden');
+            document.getElementById('demoModal').classList.add('hidden');
+        }
+
+        function goToDashboard() {
+            window.location.href = '/frontend/src/pages/dashboard.html';
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userInfo');
+            location.reload();
+        }
+
+        function selectPlan(plan) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Veuillez vous connecter pour choisir un plan');
+                showLoginModal();
+                return;
+            }
+            
+            if (plan === 'premium') {
+                // Redirect to Stripe checkout
+                alert('Redirection vers le paiement Premium (29€/mois)...');
+            } else if (plan === 'enterprise') {
+                // Contact form
+                alert('Contactez-nous pour le plan Enterprise');
+            }
+        }
+
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Connexion...';
+            submitButton.disabled = true;
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    localStorage.setItem('token', data.access_token);
+                    localStorage.setItem('userInfo', JSON.stringify(data.user));
+                    
+                    // Show success message
+                    submitButton.innerHTML = '<i class="fas fa-check mr-2"></i>Connecté !';
+                    submitButton.classList.remove('bg-green-600', 'hover:bg-green-500');
+                    submitButton.classList.add('bg-green-500');
+                    
+                    setTimeout(() => {
+                        closeModals();
+                        checkAuthStatus();
+                        // Redirect to dashboard
+                        window.location.href = '/frontend/src/pages/dashboard.html';
+                    }, 1000);
+                } else {
+                    throw new Error(data.detail || 'Erreur de connexion');
+                }
+            } catch (error) {
+                alert(error.message || 'Erreur de connexion');
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }
+        });
+
+        // Register form handler
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const full_name = document.getElementById('registerName').value;
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Création...';
+            submitButton.disabled = true;
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, email, password, plan: 'free' })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    submitButton.innerHTML = '<i class="fas fa-check mr-2"></i>Compte créé !';
+                    submitButton.classList.remove('bg-green-600', 'hover:bg-green-500');
+                    submitButton.classList.add('bg-green-500');
+                    
+                    setTimeout(() => {
+                        alert('Compte créé avec succès! Veuillez vous connecter.');
+                        closeModals();
+                        showLoginModal();
+                    }, 1000);
+                } else {
+                    throw new Error(data.detail || 'Erreur lors de la création du compte');
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                alert('Erreur de connexion au serveur. Vérifiez que le serveur est démarré.');
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }
+        });
+
+        // Close modals on outside click
+        document.addEventListener('click', function(e) {
+            if (e.target.id === 'loginModal' || e.target.id === 'registerModal' || e.target.id === 'demoModal') {
+                closeModals();
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModals();
+            }
+        });
+    </script>
+</body>
+</html>
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white cyber-grid">
+    <!-- Matrix Background Effect -->
+    <canvas class="matrix-effect" id="matrix-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="bg-black/70 backdrop-blur-sm border-b border-green-500/30 sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-eye text-green-400 text-3xl neon-glow"></i>
+                    <div>
+                        <h1 class="text-3xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                            OSINT-AI Platform
+                        </h1>
+                        <p class="text-gray-400 text-sm">Open Source Intelligence & Investigation Hub</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-green-400 flex items-center">
+                        <i class="fas fa-shield-alt mr-2"></i> Sécurisé
+                    </span>
+                    <span class="text-blue-400 flex items-center">
+                        <i class="fas fa-robot mr-2"></i> IA Powered
+                    </span>
+                    <div class="w-3 h-3 bg-green-400 rounded-full pulse-animation"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-8">
+                <h2 class="text-6xl font-bold mb-6">
+                    <span class="bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        Intelligence Hub
+                    </span>
+                </h2>
+                <div class="text-xl text-gray-300 mb-4 h-8 overflow-hidden">
+                    <span class="typing-animation inline-block whitespace-nowrap">Recherches OSINT • Analyse IA • Investigation Avancée</span>
+                </div>
+                <p class="text-gray-400 text-lg max-w-3xl mx-auto">
+                    Plateforme d'intelligence artificielle pour l'investigation et l'analyse OSINT. 
+                    Recherchez, analysez et obtenez des insights sur des cibles avec des outils de pointe.
+                </p>
+            </div>
+            
+            <!-- Quick Search -->
+            <div class="max-w-2xl mx-auto mb-12">
+                <div class="glass-effect rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 flex items-center justify-center">
+                        <i class="fas fa-search text-green-400 mr-3"></i>
+                        Recherche Rapide OSINT
+                    </h3>
+                    <div class="flex gap-4">
+                        <input type="text" id="quickSearch" placeholder="Entrez un nom, handle, email, domaine..." 
+                               class="flex-1 bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-green-400 focus:outline-none">
+                        <button onclick="performQuickSearch()" 
+                                class="bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-lg font-bold transition-all glow-on-hover">
+                            <i class="fas fa-search mr-2"></i>Analyser
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-6 mb-12">
+                <div class="glass-effect rounded-lg p-6 text-center glow-on-hover">
+                    <i class="fas fa-search text-green-400 text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold text-green-400">2</h3>
+                    <p class="text-gray-300">Recherches Effectuées</p>
+                </div>
+                <div class="glass-effect rounded-lg p-6 text-center glow-on-hover">
+                    <i class="fas fa-database text-blue-400 text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold text-blue-400">50+</h3>
+                    <p class="text-gray-300">Sources Analysées</p>
+                </div>
+                <div class="glass-effect rounded-lg p-6 text-center glow-on-hover">
+                    <i class="fas fa-brain text-purple-400 text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold text-purple-400">IA</h3>
+                    <p class="text-gray-300">Scoring Avancé</p>
+                </div>
+                <div class="glass-effect rounded-lg p-6 text-center glow-on-hover">
+                    <i class="fas fa-shield-alt text-yellow-400 text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold text-yellow-400">100%</h3>
+                    <p class="text-gray-300">Légal & Éthique</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Navigation -->
+    <section class="py-12">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <span class="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                    Centre de Commande
+                </span>
+            </h2>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- OSINT Tools -->
+                <div class="glass-effect rounded-lg p-6 glow-on-hover">
+                    <h3 class="text-xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-tools text-green-400 mr-3"></i>
+                        Outils OSINT
+                    </h3>
+                    <div class="space-y-4">
+                        <button onclick="runOSINTSearch('ABDELILAH ABDELLAOUI')" 
+                                class="w-full bg-green-900/30 hover:bg-green-800/50 border border-green-500/50 rounded-lg p-4 text-left transition-all">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-green-400">Recherche Personnalité</h4>
+                                    <p class="text-gray-300 text-sm">Analyse complète d'une personne</p>
+                                </div>
+                                <i class="fas fa-user text-green-400"></i>
+                            </div>
+                        </button>
+                        
+                        <button onclick="runOSINTSearch('A4CH3R')" 
+                                class="w-full bg-red-900/30 hover:bg-red-800/50 border border-red-500/50 rounded-lg p-4 text-left transition-all">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-red-400">Recherche Handle/Pseudo</h4>
+                                    <p class="text-gray-300 text-sm">Analyse d'un pseudonyme</p>
+                                </div>
+                                <i class="fas fa-mask text-red-400"></i>
+                            </div>
+                        </button>
+                        
+                        <button onclick="showCustomSearch()" 
+                                class="w-full bg-blue-900/30 hover:bg-blue-800/50 border border-blue-500/50 rounded-lg p-4 text-left transition-all">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-blue-400">Recherche Personnalisée</h4>
+                                    <p class="text-gray-300 text-sm">Entrez votre propre cible</p>
+                                </div>
+                                <i class="fas fa-cog text-blue-400"></i>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reports & Analysis -->
+                <div class="glass-effect rounded-lg p-6 glow-on-hover">
+                    <h3 class="text-xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-chart-line text-blue-400 mr-3"></i>
+                        Rapports & Analyses
+                    </h3>
+                    <div class="space-y-4">
+                        <a href="demo_report.html" target="_blank"
+                           class="block w-full bg-blue-900/30 hover:bg-blue-800/50 border border-blue-500/50 rounded-lg p-4 transition-all">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-blue-400">Rapport ABDELILAH</h4>
+                                    <p class="text-gray-300 text-sm">Analyse complète avec scoring IA</p>
+                                </div>
+                                <i class="fas fa-external-link-alt text-blue-400"></i>
+                            </div>
+                        </a>
+                        
+                        <a href="a4ch3r_osint_dashboard.html" target="_blank"
+                           class="block w-full bg-red-900/30 hover:bg-red-800/50 border border-red-500/50 rounded-lg p-4 transition-all">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-red-400">Dashboard A4CH3R</h4>
+                                    <p class="text-gray-300 text-sm">Analyse de sécurité approfondie</p>
+                                </div>
+                                <i class="fas fa-external-link-alt text-red-400"></i>
+                            </div>
+                        </a>
+                        
+                        <a href="OSINT_FINAL_REPORT.md" target="_blank"
+                           class="block w-full bg-green-900/30 hover:bg-green-800/50 border border-green-500/50 rounded-lg p-4 transition-all">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-green-400">Rapport Final</h4>
+                                    <p class="text-gray-300 text-sm">Documentation complète</p>
+                                </div>
+                                <i class="fas fa-file-alt text-green-400"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Platform Management -->
+                <div class="glass-effect rounded-lg p-6 glow-on-hover">
+                    <h3 class="text-xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-server text-purple-400 mr-3"></i>
+                        Gestion Plateforme
+                    </h3>
+                    <div class="space-y-4">
+                        <button onclick="startBackend()" 
+                                class="w-full bg-purple-900/30 hover:bg-purple-800/50 border border-purple-500/50 rounded-lg p-4 text-left transition-all">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-purple-400">Démarrer Backend</h4>
+                                    <p class="text-gray-300 text-sm">API FastAPI + Base de données</p>
+                                </div>
+                                <i class="fas fa-play text-purple-400"></i>
+                            </div>
+                        </button>
+                        
+                        <button onclick="startFrontend()" 
+                                class="w-full bg-cyan-900/30 hover:bg-cyan-800/50 border border-cyan-500/50 rounded-lg p-4 text-left transition-all">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-cyan-400">Démarrer Frontend</h4>
+                                    <p class="text-gray-300 text-sm">Interface Next.js moderne</p>
+                                </div>
+                                <i class="fas fa-desktop text-cyan-400"></i>
+                            </div>
+                        </button>
+                        
+                        <a href="README.md" target="_blank"
+                           class="block w-full bg-yellow-900/30 hover:bg-yellow-800/50 border border-yellow-500/50 rounded-lg p-4 transition-all">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-yellow-400">Documentation</h4>
+                                    <p class="text-gray-300 text-sm">Guide d'utilisation complet</p>
+                                </div>
+                                <i class="fas fa-book text-yellow-400"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Activity -->
+    <section class="py-12">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <span class="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                    Activité Récente
+                </span>
+            </h2>
+            
+            <div class="glass-effect rounded-lg p-6">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4 p-4 bg-green-900/20 rounded-lg border border-green-500/30">
+                        <i class="fas fa-check-circle text-green-400 text-xl"></i>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-green-400">Recherche OSINT Terminée</h4>
+                            <p class="text-gray-300 text-sm">A4CH3R analysé avec succès - Score: 33% (Suspicieux)</p>
+                        </div>
+                        <span class="text-gray-400 text-sm">Maintenant</span>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4 p-4 bg-blue-900/20 rounded-lg border border-blue-500/30">
+                        <i class="fas fa-file-alt text-blue-400 text-xl"></i>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-blue-400">Rapport Généré</h4>
+                            <p class="text-gray-300 text-sm">Dashboard interactif A4CH3R créé avec visualisations</p>
+                        </div>
+                        <span class="text-gray-400 text-sm">Il y a 2 min</span>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4 p-4 bg-purple-900/20 rounded-lg border border-purple-500/30">
+                        <i class="fas fa-brain text-purple-400 text-xl"></i>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-purple-400">IA Analysis</h4>
+                            <p class="text-gray-300 text-sm">Scoring de confiance calculé pour ABDELILAH ABDELLAOUI</p>
+                        </div>
+                        <span class="text-gray-400 text-sm">Aujourd'hui</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/70 backdrop-blur-sm border-t border-green-500/30 mt-12">
+        <div class="container mx-auto px-6 py-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-green-400 mb-4">OSINT-AI Platform</h3>
+                    <p class="text-gray-400">
+                        Plateforme d'intelligence artificielle pour l'investigation et l'analyse OSINT professionnelle.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-blue-400 mb-4">Fonctionnalités</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Recherche OSINT avancée</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Scoring IA intelligent</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Rapports détaillés</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Interface moderne</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-purple-400 mb-4">Conformité</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><i class="fas fa-shield-alt text-green-400 mr-2"></i>Sources publiques</li>
+                        <li><i class="fas fa-balance-scale text-green-400 mr-2"></i>Usage légal</li>
+                        <li><i class="fas fa-user-shield text-green-400 mr-2"></i>Respect vie privée</li>
+                        <li><i class="fas fa-certificate text-green-400 mr-2"></i>Éthique OSINT</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+                <p class="text-gray-400">
+                    <i class="fas fa-shield-alt text-green-400 mr-2"></i>
+                    OSINT-AI Platform © 2025 - Analyse générée le 26/06/2025
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Search Modal -->
+    <div id="customSearchModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="glass-effect rounded-lg p-6 max-w-md w-full">
+                <h3 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-search text-green-400 mr-3"></i>
+                    Recherche Personnalisée
+                </h3>
+                <input type="text" id="customTarget" placeholder="Entrez votre cible..." 
+                       class="w-full bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-green-400 focus:outline-none mb-4">
+                <div class="flex gap-4">
+                    <button onclick="executeCustomSearch()" 
+                            class="flex-1 bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg font-bold transition-all">
+                        Analyser
+                    </button>
+                    <button onclick="closeCustomSearch()" 
+                            class="flex-1 bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded-lg font-bold transition-all">
+                        Annuler
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix effect
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+        const matrixArray = matrix.split("");
+
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for(let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#22c55e';
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < drops.length; i++) {
+                const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 35);
+
+        // Window resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Functions for interactive elements
+        function performQuickSearch() {
+            const target = document.getElementById('quickSearch').value;
+            if (target.trim()) {
+                runOSINTSearch(target);
+            } else {
+                alert('Veuillez entrer une cible à analyser');
+            }
+        }
+
+        function runOSINTSearch(target) {
+            // Show loading state
+            const button = event?.target || document.querySelector('button');
+            const originalText = button?.innerHTML || 'Analyser';
+            if (button) {
+                button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Analyse en cours...';
+                button.disabled = true;
+            }
+
+            // Simulate OSINT search
+            setTimeout(() => {
+                if (target.includes('A4CH3R')) {
+                    window.open('a4ch3r_osint_dashboard.html', '_blank');
+                } else if (target.includes('ABDELILAH')) {
+                    window.open('demo_report.html', '_blank');
+                } else {
+                    alert(`Recherche OSINT lancée pour: ${target}\n\nCette fonctionnalité sera bientôt disponible!`);
+                }
+                
+                if (button) {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                }
+            }, 2000);
+        }
+
+        function showCustomSearch() {
+            document.getElementById('customSearchModal').classList.remove('hidden');
+        }
+
+        function closeCustomSearch() {
+            document.getElementById('customSearchModal').classList.add('hidden');
+        }
+
+        function executeCustomSearch() {
+            const target = document.getElementById('customTarget').value;
+            if (target.trim()) {
+                closeCustomSearch();
+                runOSINTSearch(target);
+            } else {
+                alert('Veuillez entrer une cible');
+            }
+        }
+
+        function startBackend() {
+            alert('Démarrage du backend FastAPI...\n\nCommande: uvicorn backend.main:app --reload\nPort: 8000');
+        }
+
+        function startFrontend() {
+            alert('Démarrage du frontend Next.js...\n\nCommande: cd frontend && npm run dev\nPort: 3000');
+        }
+
+        // Enter key handlers
+        document.getElementById('quickSearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performQuickSearch();
+            }
+        });
+
+        document.getElementById('customTarget').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                executeCustomSearch();
+            }
+        });
+
+        // Close modal on outside click
+        document.getElementById('customSearchModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCustomSearch();
+            }
+        });
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to buttons
+            const buttons = document.querySelectorAll('button, a');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-1px)';
+                    this.style.transition = 'transform 0.2s ease';
+                });
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Simulate real-time updates
+            setInterval(() => {
+                const statusDot = document.querySelector('.pulse-animation');
+                if (statusDot) {
+                    statusDot.style.backgroundColor = Math.random() > 0.5 ? '#22c55e' : '#3b82f6';
+                }
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
